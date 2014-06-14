@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider,  $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -30,36 +30,55 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $stateProvider
 
     // setup an abstract state for the tabs directive
-    .state('home', {
-      url: "/home",
-      // abstract: true,
-      templateUrl: "templates/homePage.html"
+    .state('tab', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "templates/tabs.html"
     })
 
     // Each tab has its own nav history stack:
 
-    .state('inscription', {
-      url: '/inscription',
-      templateUrl: 'templates/inscription.html',
-      controller: 'InscriptionCtrl'
+    .state('tab.dash', {
+      url: '/dash',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-dash.html',
+          controller: 'DashCtrl'
+        }
+      }
     })
 
-    .state('connexion', {
-      url: '/connexion',
-      templateUrl: 'templates/connexion.html',
-      controller: 'ConnexionCtrl'
+    .state('tab.friends', {
+      url: '/friends',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/tab-friends.html',
+          controller: 'FriendsCtrl'
+        }
+      }
+    })
+    .state('tab.friend-detail', {
+      url: '/friend/:friendId',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/friend-detail.html',
+          controller: 'FriendDetailCtrl'
+        }
+      }
     })
 
-    .state('welcome', {
-      url: '/welcome',
-      templateUrl: 'templates/welcome.html',
-      controller: 'WelcomeCtrl'
+    .state('tab.account', {
+      url: '/account',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/tab-account.html',
+          controller: 'AccountCtrl'
+        }
+      }
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/home');
-       $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.headers.common = 'Content-Type: application/json';
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  $urlRouterProvider.otherwise('/tab/dash');
+
 });
 
