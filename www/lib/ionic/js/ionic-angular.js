@@ -6729,10 +6729,10 @@ IonicModule
       '</div>' +
     '</div>',
     compile: function($element, $attrs) {
-      if (angular.isUndefined($attrs.pullingIcon)) {
+      if (angular.isundefined($attrs.pullingIcon)) {
         $attrs.$set('pullingIcon', 'ion-arrow-down-c');
       }
-      if (angular.isUndefined($attrs.refreshingIcon)) {
+      if (angular.isundefined($attrs.refreshingIcon)) {
         $attrs.$set('refreshingIcon', 'ion-loading-d');
       }
       return function($scope, $element, $attrs, scrollCtrl) {
@@ -6888,8 +6888,8 @@ IonicModule
     require: '^ionSideMenus',
     scope: true,
     compile: function(element, attr) {
-      angular.isUndefined(attr.isEnabled) && attr.$set('isEnabled', 'true');
-      angular.isUndefined(attr.width) && attr.$set('width', '275');
+      angular.isundefined(attr.isEnabled) && attr.$set('isEnabled', 'true');
+      angular.isundefined(attr.width) && attr.$set('width', '275');
 
       element.addClass('menu menu-' + attr.side);
 

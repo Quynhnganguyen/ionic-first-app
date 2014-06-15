@@ -21,7 +21,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider,  $httpProvider) {
+// .run(function(DB){
+//   DB.init();
+// })
+
+.config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -58,8 +62,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/home');
-       $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.headers.common = 'Content-Type: application/json';
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+       // $httpProvider.defaults.useXDomain = true;
+       //  $http.defaults.headers.common = 'Content-Type: application/json';
+        // $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 });
 

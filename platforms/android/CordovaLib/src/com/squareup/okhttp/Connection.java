@@ -243,7 +243,7 @@ public final class Connection implements Closeable {
   }
 
   /**
-   * Returns the time in ns when this connection became idle. Undefined if
+   * Returns the time in ns when this connection became idle. undefined if
    * this connection is not idle.
    */
   public long getIdleStartTimeNs() {

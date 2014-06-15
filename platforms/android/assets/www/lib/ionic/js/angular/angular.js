@@ -111,7 +111,7 @@ function minErr(module) {
     -noop,
     -identity,
     -valueFn,
-    -isUndefined,
+    -isundefined,
     -isDefined,
     -isObject,
     -isString,
@@ -486,7 +486,7 @@ function valueFn(value) {return function() {return value;};}
 
 /**
  * @ngdoc function
- * @name angular.isUndefined
+ * @name angular.isundefined
  * @module ng
  * @kind function
  *
@@ -496,7 +496,7 @@ function valueFn(value) {return function() {return value;};}
  * @param {*} value Reference to check.
  * @returns {boolean} True if `value` is undefined.
  */
-function isUndefined(value){return typeof value === 'undefined';}
+function isundefined(value){return typeof value === 'undefined';}
 
 
 /**
@@ -1971,7 +1971,7 @@ function publishExternalAPI(angular){
     'toJson': toJson,
     'fromJson': fromJson,
     'identity':identity,
-    'isUndefined': isUndefined,
+    'isundefined': isundefined,
     'isDefined': isDefined,
     'isString': isString,
     'isFunction': isFunction,
@@ -2368,14 +2368,14 @@ function jqLiteOff(element, type, fn, unsupported) {
 
   if (!handle) return; //no listeners registered
 
-  if (isUndefined(type)) {
+  if (isundefined(type)) {
     forEach(events, function(eventHandler, type) {
       removeEventListenerFn(element, type, eventHandler);
       delete events[type];
     });
   } else {
     forEach(type.split(' '), function(type) {
-      if (isUndefined(fn)) {
+      if (isundefined(fn)) {
         removeEventListenerFn(element, type, events[type]);
         delete events[type];
       } else {
@@ -2689,7 +2689,7 @@ forEach({
 
     function getText(element, value) {
       var textProp = NODE_TYPE_TEXT_PROPERTY[element.nodeType];
-      if (isUndefined(value)) {
+      if (isundefined(value)) {
         return textProp ? element[textProp] : '';
       }
       element[textProp] = value;
@@ -2697,7 +2697,7 @@ forEach({
   })(),
 
   val: function(element, value) {
-    if (isUndefined(value)) {
+    if (isundefined(value)) {
       if (nodeName_(element) === 'SELECT' && element.multiple) {
         var result = [];
         forEach(element.options, function (option) {
@@ -2713,7 +2713,7 @@ forEach({
   },
 
   html: function(element, value) {
-    if (isUndefined(value)) {
+    if (isundefined(value)) {
       return element.innerHTML;
     }
     for (var i = 0, childNodes = element.childNodes; i < childNodes.length; i++) {
@@ -2790,7 +2790,7 @@ function createEventHandler(element, events) {
       event.target = event.srcElement || document;
     }
 
-    if (isUndefined(event.defaultPrevented)) {
+    if (isundefined(event.defaultPrevented)) {
       var prevent = event.preventDefault;
       event.preventDefault = function() {
         event.defaultPrevented = true;
@@ -2988,7 +2988,7 @@ forEach({
     if (selector) {
       forEach(selector.split(' '), function(className){
         var classCondition = condition;
-        if (isUndefined(classCondition)) {
+        if (isundefined(classCondition)) {
           classCondition = !jqLiteHasClass(element, className);
         }
         (classCondition ? jqLiteAddClass : jqLiteRemoveClass)(element, className);
@@ -3045,7 +3045,7 @@ forEach({
   JQLite.prototype[name] = function(arg1, arg2, arg3) {
     var value;
     for(var i=0; i < this.length; i++) {
-      if (isUndefined(value)) {
+      if (isundefined(value)) {
         value = fn(this[i], arg1, arg2, arg3);
         if (isDefined(value)) {
           // any function which returns a value needs to be wrapped
@@ -4379,7 +4379,7 @@ function Browser(window, document, $log, $sniffer) {
    * @returns {function()} the added function
    */
   self.addPollFn = function(fn) {
-    if (isUndefined(pollTimeout)) startPoller(100, setTimeout);
+    if (isundefined(pollTimeout)) startPoller(100, setTimeout);
     pollFns.push(fn);
     return fn;
   };
@@ -4790,7 +4790,7 @@ function $CacheFactoryProvider() {
        *    });
        *
        *    superCache.remove('another key');
-       *    expect(superCache.get('another key')).toBeUndefined();
+       *    expect(superCache.get('another key')).toBeundefined();
        *
        *    superCache.removeAll();
        *    expect(superCache.info()).toEqual({
@@ -4827,7 +4827,7 @@ function $CacheFactoryProvider() {
             refresh(lruEntry);
           }
 
-          if (isUndefined(value)) return;
+          if (isundefined(value)) return;
           if (!(key in data)) size++;
           data[key] = value;
 
@@ -7935,7 +7935,7 @@ function $HttpProvider() {
         var reqData = transformData(config.data, headersGetter(headers), config.transformRequest);
 
         // strip content-type if data is undefined
-        if (isUndefined(config.data)) {
+        if (isundefined(config.data)) {
           forEach(headers, function(value, header) {
             if (lowercase(header) === 'content-type') {
                 delete headers[header];
@@ -7943,7 +7943,7 @@ function $HttpProvider() {
           });
         }
 
-        if (isUndefined(config.withCredentials) && !isUndefined(defaults.withCredentials)) {
+        if (isundefined(config.withCredentials) && !isundefined(defaults.withCredentials)) {
           config.withCredentials = defaults.withCredentials;
         }
 
@@ -8206,7 +8206,7 @@ function $HttpProvider() {
       }
 
       // if we won't have the response in cache, send the request to the backend
-      if (isUndefined(cachedResp)) {
+      if (isundefined(cachedResp)) {
         $httpBackend(config.method, url, reqData, done, reqHeaders, config.timeout,
             config.withCredentials, config.responseType);
       }
@@ -8263,7 +8263,7 @@ function $HttpProvider() {
           if (!params) return url;
           var parts = [];
           forEachSorted(params, function(value, key) {
-            if (value === null || isUndefined(value)) return;
+            if (value === null || isundefined(value)) return;
             if (!isArray(value)) value = [value];
 
             forEach(value, function(v) {
@@ -9320,7 +9320,7 @@ LocationHashbangInHtml5Url.prototype =
    * @return {string} url
    */
   url: function(url, replace) {
-    if (isUndefined(url))
+    if (isundefined(url))
       return this.$$url;
 
     var match = PATH_MATCH.exec(url);
@@ -9449,7 +9449,7 @@ LocationHashbangInHtml5Url.prototype =
         }
         break;
       default:
-        if (isUndefined(paramValue) || paramValue === null) {
+        if (isundefined(paramValue) || paramValue === null) {
           delete this.$$search[search];
         } else {
           this.$$search[search] = paramValue;
@@ -9499,7 +9499,7 @@ function locationGetter(property) {
 
 function locationGetterSetter(property, preprocess) {
   return function(value) {
-    if (isUndefined(value))
+    if (isundefined(value))
       return this[property];
 
     this[property] = preprocess(value);
@@ -11307,14 +11307,14 @@ function $ParseProvider() {
  *      var resolvedValue;
  *
  *      promise.then(function(value) { resolvedValue = value; });
- *      expect(resolvedValue).toBeUndefined();
+ *      expect(resolvedValue).toBeundefined();
  *
  *      // Simulate resolving of promise
  *      deferred.resolve(123);
  *      // Note that the 'then' function does not get called synchronously.
  *      // This is because we want the promise API to always be async, whether or not
  *      // it got called synchronously or asynchronously.
- *      expect(resolvedValue).toBeUndefined();
+ *      expect(resolvedValue).toBeundefined();
  *
  *      // Propagate promise resolution to 'then' functions using $apply().
  *      $rootScope.$apply();
@@ -14060,7 +14060,7 @@ function $SnifferProvider() {
         // when cut operation is performed.
         if (event == 'input' && msie == 9) return false;
 
-        if (isUndefined(eventSupport[event])) {
+        if (isundefined(eventSupport[event])) {
           var divElm = document.createElement('div');
           eventSupport[event] = 'on' + event in divElm;
         }
@@ -14725,7 +14725,7 @@ currencyFilter.$inject = ['$locale'];
 function currencyFilter($locale) {
   var formats = $locale.NUMBER_FORMATS;
   return function(amount, currencySymbol){
-    if (isUndefined(currencySymbol)) currencySymbol = formats.CURRENCY_SYM;
+    if (isundefined(currencySymbol)) currencySymbol = formats.CURRENCY_SYM;
     return formatNumber(amount, formats.PATTERNS[1], formats.GROUP_SEP, formats.DECIMAL_SEP, 2).
                 replace(/\u00A4/g, currencySymbol);
   };
@@ -14815,7 +14815,7 @@ function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
     var fractionLen = (numStr.split(DECIMAL_SEP)[1] || '').length;
 
     // determine fractionSize if it is not specified
-    if (isUndefined(fractionSize)) {
+    if (isundefined(fractionSize)) {
       fractionSize = Math.min(Math.max(pattern.minFrac, fractionLen), pattern.maxFrac);
     }
 
@@ -16985,7 +16985,7 @@ function emailInputType(scope, element, attr, ctrl, $sniffer, $browser) {
 
 function radioInputType(scope, element, attr, ctrl) {
   // make the name unique, if not defined
-  if (isUndefined(attr.name)) {
+  if (isundefined(attr.name)) {
     element.attr('name', nextUid());
   }
 
@@ -17381,7 +17381,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @returns {boolean} True if `value` is empty.
    */
   this.$isEmpty = function(value) {
-    return isUndefined(value) || value === '' || value === null || value !== value;
+    return isundefined(value) || value === '' || value === null || value !== value;
   };
 
   var parentForm = $element.inheritedData('$formController') || nullFormCtrl,
@@ -17819,7 +17819,7 @@ var ngListDirective = function() {
 
       var parse = function(viewValue) {
         // If the viewValue is invalid (say required but empty) it will be `undefined`
-        if (isUndefined(viewValue)) return;
+        if (isundefined(viewValue)) return;
 
         var list = [];
 
@@ -21266,7 +21266,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
             selectElement.val(viewValue);
             if (viewValue === '') emptyOption.prop('selected', true); // to make IE9 happy
           } else {
-            if (isUndefined(viewValue) && emptyOption) {
+            if (isundefined(viewValue) && emptyOption) {
               selectElement.val('');
             } else {
               selectCtrl.renderUnknownOption(viewValue);
@@ -21609,7 +21609,7 @@ var optionDirective = ['$interpolate', function($interpolate) {
     restrict: 'E',
     priority: 100,
     compile: function(element, attr) {
-      if (isUndefined(attr.value)) {
+      if (isundefined(attr.value)) {
         var interpolateFn = $interpolate(element.text(), true);
         if (!interpolateFn) {
           attr.$set('value', element.text());
