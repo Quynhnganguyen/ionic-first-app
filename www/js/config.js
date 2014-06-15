@@ -4,7 +4,7 @@ angular.module('starter.config', [])
     name: 'DB',
     tables: [
       {
-            name: 'users',
+            name: 'inscription',
             columns: [
                 {name: 'id', type: 'serial primary key'},
                 {name: 'nom', type: 'text'},

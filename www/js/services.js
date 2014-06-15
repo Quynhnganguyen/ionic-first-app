@@ -20,6 +20,7 @@ angular.module('starter.services', ['starter.config'])
 			self.query(query);
 			console.log('table' + table.name + 'initialized');
 		});
+		self.executeSql("INSERT INTO inscription VALUES (1,'Ryan', 'Howard', 'Vice President, North East','ryan@dundermifflin.com', 'motdepasse')");
 	};
 
 	self.query = function(query, bindings){
@@ -31,7 +32,6 @@ angular.module('starter.services', ['starter.config'])
 				deferred.resolve(result);
 			}, function(transaction, error){
 				deferred.reject(error);
-				 alert("Transaction Error: " + error);
 			});
 		});
 		return deferred.promise;
@@ -56,24 +56,31 @@ angular.module('starter.services', ['starter.config'])
 	var self = this;
 
 	self.all = function(){
-		return DB.query('select * from users')
+		return DB.query('select * from inscription')
 		.then(function(result){
 			return DB.fetchAll(result);
 		});
 	};
 
-	self.getByEmail = function(email){
-		return DB.query('select * from users where email = ?',[email])
+	self.getById = function(id){	
+		return DB.query('select * from inscription where id = '+id)
 		.then(function(result){
 			result DB.fetch(result);
 		});
 	};
+	// self.getByEmail = function(email){	
+	// 	return DB.query('select * from users where email = ?',[email])
+	// 	.then(function(result){
+	// 		result DB.fetch(result);
+	// 	});
+	// };
 
-	self.insertUser = function(user){
-		return DB.query('insert into users values ('+user.nom+','+ user.prenom+','+ user.adresse+ ','+ user.mail+','+ user.password')')
-		.then(function(result){
-			return DB.result;
-		});
-	}
+	// self.insertUser = function(user){
+	// 	return DB.query('insert into users(nom,prenom,adresse,email,password) 
+	// 		values ('+user.nom+','+ user.prenom+','+ user.adresse+ ','+ user.mail+','+ user.password')')
+	// 	.then(function(result){
+	// 		return DB.result;
+	// 	});
+	// };
 	return self;
 });
